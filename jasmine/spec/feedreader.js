@@ -32,7 +32,7 @@ $(function() {
          */
         it('URL is defined and is not empty', function() {
             for(var i in allFeeds) {
-              //regular expression to ensure the URL is not empty and formatted correctly
+              //regular expression to ensure the URL is not empty and formatted correctly. I found this in a Stackoverflow thread."https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url"
               var checkUrl = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
               expect(allFeeds[i].url).toBeDefined();
               expect(allFeeds[i].url).toMatch(checkUrl);
