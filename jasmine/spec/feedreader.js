@@ -5,20 +5,20 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
-        it('URL is defined and is not empty', function() {
-            for(var i in allFeeds) {
-              //regular expression to ensure the URL is not empty and formatted correctly. I found this in a Stackoverflow thread."https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url"
-              var checkUrl = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
-              expect(allFeeds[i].url).toBeDefined();
-              expect(allFeeds[i].url).toMatch(checkUrl);
-            }
+        it("URL is defined and is not empty", function() {
+            //regular expression to ensure the URL is not empty and formatted correctly. I found this in a Stackoverflow thread."https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url"
+            var checkUrl = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+            allFeeds.forEach(function(feed) {
+                expect(feed.url).toBeDefined();
+                expect(feed.url).toMatch(checkUrl);
+            });
         });
 
-         it('name is defined and is not empty', function() {
-            for(var i in allFeeds) {
-                expect(allFeeds[i].name).toBeTruthy();
-            }
-         });
+        it('name is defined and is not empty', function() {
+            allFeeds.forEach(function(feed) {
+                expect(feed.name).toBeTruthy();
+            });
+        });
     });
 
     describe('The menu', function() {
@@ -66,12 +66,6 @@ $(function() {
                 nextFeed = $('.feed').html();
 
                 expect(initFeed).not.toEqual(nextFeed);
-                done();
-            });
-        });
-        // reset 'loadFeed' index
-        afterEach(function(done) {
-            loadFeed(0, function() {
                 done();
             });
         });
